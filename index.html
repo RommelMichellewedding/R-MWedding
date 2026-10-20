@@ -368,6 +368,8 @@ html.locked, html.locked body { overflow: hidden; height: 100%; }
 }
 @keyframes rise { from { opacity: .001; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+.btn-link.big { padding: 18px 40px; font-size: 12px; color: var(--midnight); border-color: transparent; background: linear-gradient(110deg, #f0d896, #c9a45c 30%, #f6e3ae 50%, #c9a45c 70%, #a07a34); background-size: 220% 100%; transition: background-position .7s ease; }
+.btn-link.big:hover, .btn-link.big:focus-visible { background-position: 100% 0; color: var(--midnight); }
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
@@ -411,6 +413,9 @@ window.INVITE = {
   receptionNote: "Reception to follow",
   rsvpBy: "December 1, 2026",
   closing: "We can\u2019t wait to celebrate with you!",
+
+  // RSVP button: the page it opens. Empty = no button.
+  rsvpLink: "rsvp.html",
 
   // Photos. Put your pictures in a folder named "photos" next to index.html,
   // then write their file names here. Leave empty to show placeholder frames.
@@ -658,11 +663,27 @@ window.INVITE = {
     <div class="entourage" id="entourage-grid" data-reveal></div>
   </section>
 
+  <section id="rsvp-link">
+    <p class="label">Kindly reply</p>
+    <svg class="flourish" aria-hidden="true" data-reveal><use href="#flourish"/></svg>
+    <h2 data-reveal>Will you join us?</h2>
+    <p style="margin-top:12px;color:var(--beige);font-style:italic" data-reveal>Kindly reply on or before <span data-k="rsvpBy">December 1, 2026</span></p>
+    <p data-reveal style="margin-top:30px"><a class="btn-link big" id="rsvp-btn" href="rsvp.html">RSVP here</a></p>
+  </section>
+
   <footer data-reveal>
     <div class="wreath"><svg viewBox="0 0 220 220" aria-hidden="true"><use href="#wreath"/></svg><span class="script" data-k="monogram">M &amp; R</span></div>
     <p class="label">Timeless love<br>Elegant details<br>Forever together</p>
   </footer>
 </main>
+
+<script>
+(function () {
+  var C = window.INVITE || {}, sec = document.getElementById("rsvp-link");
+  if (!sec) return;
+  if (C.rsvpLink) { document.getElementById("rsvp-btn").href = C.rsvpLink; } else { sec.hidden = true; }
+})();
+</script>
 
 <button class="music off" id="music-btn" type="button" aria-label="Music on or off" aria-pressed="false"><svg aria-hidden="true"><use href="#i-note"/></svg></button>
 <div class="lb" id="lb" role="dialog" aria-label="Photo"><img id="lb-img" alt=""></div>
