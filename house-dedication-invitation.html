@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body{margin:0}</style>
+<title>Santos House Dedication</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: dark navy invitation card. Framed centered hero with gold double border, then editorial rows: small label and title on the left, content on the right, separated by hairlines. */
+:root{
+  --bg:#0A1322; --surface:#101D35; --ink:#F3ECDD; --muted:#A8B2C6;
+  --gold:#D8B46C; --gold-soft:#8A7444; --line:#24334F; --on-gold:#1A1405;
+  --font-display:'Bodoni Moda','Didot','Times New Roman',serif;
+  --font-body:'Jost','Futura',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink); font-family:var(--font-body); font-weight:400; font-size:17px; line-height:1.65;
+  padding-block:20px 0; padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:var(--font-display); font-weight:400; margin:0; text-wrap:balance}
+p{margin:0}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--gold); outline-offset:3px}
+.wrap{max-width:1040px; margin:0 auto}
+.label{font-size:12px; font-weight:500; letter-spacing:.26em; text-transform:uppercase; color:var(--gold)}
+
+/* HERO */
+.hero{
+  position:relative; text-align:center; border:1px solid var(--gold-soft);
+  padding:clamp(52px,9vw,100px) clamp(22px,6vw,72px) clamp(44px,7vw,72px);
+  background:radial-gradient(ellipse 70% 55% at 50% 0%,rgba(216,180,108,.16),transparent 70%),var(--bg);
+}
+.hero::before{content:""; position:absolute; inset:9px; border:1px solid var(--line); pointer-events:none}
+.hero .intro{font-size:13px; letter-spacing:.3em; text-transform:uppercase; color:var(--muted)}
+.hero h1{font-size:clamp(46px,11.5vw,116px); font-style:italic; font-weight:400; line-height:1.02; margin-top:26px; letter-spacing:-.01em}
+.hero .sub{margin-top:18px; font-size:15px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold)}
+.diamond{display:flex; align-items:center; justify-content:center; gap:14px; margin:34px auto; max-width:320px}
+.diamond::before,.diamond::after{content:""; height:1px; flex:1; background:var(--gold-soft)}
+.diamond i{width:9px; height:9px; background:var(--gold); transform:rotate(45deg)}
+.dateline{display:grid; grid-template-columns:1fr auto 1fr; align-items:center; max-width:640px; margin:0 auto}
+.dateline div{padding:6px 18px}
+.dateline div:nth-child(2){border-inline:1px solid var(--gold-soft)}
+.dateline small{display:block; font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--muted)}
+.dateline b{display:block; font-family:var(--font-display); font-weight:400; font-size:clamp(20px,4vw,32px); line-height:1.2; margin-top:4px}
+.hero .where{margin-top:30px; color:var(--muted); font-size:16px}
+.btn-row{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:34px}
+.btn{
+  font:inherit; font-weight:500; font-size:13px; letter-spacing:.18em; text-transform:uppercase; padding:15px 30px; border:1px solid var(--gold);
+  background:var(--gold); color:var(--on-gold); text-decoration:none; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; min-height:50px;
+}
+.btn.ghost{background:transparent; color:var(--gold)}
+.btn:hover{background:var(--ink); border-color:var(--ink); color:var(--on-gold)}
+.btn.small{padding:10px 20px; min-height:44px}
+@media (max-width:560px){
+  .dateline{grid-template-columns:1fr}
+  .dateline div:nth-child(2){border-inline:0; border-block:1px solid var(--gold-soft); margin-block:10px; padding-block:14px}
+}
+
+/* SECTIONS */
+.sec{display:grid; grid-template-columns:260px 1fr; gap:24px 64px; padding-block:68px; border-top:1px solid var(--line); margin-top:0}
+.sec:first-of-type{border-top:0}
+.sec h2{font-size:clamp(32px,4.4vw,44px); line-height:1.1; margin-top:14px}
+.sec > div{min-width:0}
+@media (max-width:820px){.sec{grid-template-columns:1fr; padding-block:52px}}
+.lead{color:var(--muted); font-size:18px; max-width:56ch}
+.quote{font-family:var(--font-display); font-style:italic; font-size:clamp(24px,4.5vw,36px); line-height:1.3; max-width:26ch; text-wrap:balance}
+
+/* COUNTDOWN */
+.count{display:grid; grid-template-columns:repeat(4,1fr)}
+.count div{padding:8px 10px; text-align:center; border-left:1px solid var(--line); min-width:0}
+.count div:first-child{border-left:0}
+.count b{display:block; font-family:var(--font-display); font-weight:400; color:var(--gold); font-size:clamp(38px,8vw,72px); line-height:1; font-variant-numeric:tabular-nums}
+.count span{display:block; margin-top:8px; font-size:11px; letter-spacing:.26em; text-transform:uppercase; color:var(--muted)}
+#cd-done{font-family:var(--font-display); font-style:italic; font-size:32px; color:var(--gold)}
+
+/* MESSAGE */
+.body p{margin-top:18px; max-width:56ch; font-size:18px; font-weight:300}
+.body p:first-child{margin-top:0}
+.sign{margin-top:32px}
+.sign small{display:block; font-size:12px; letter-spacing:.26em; text-transform:uppercase; color:var(--muted)}
+.sign span{font-family:var(--font-display); font-style:italic; font-size:30px}
+
+/* ROWS */
+.rows{margin:0}
+.rows > div{display:grid; grid-template-columns:150px 1fr; gap:16px; padding:20px 0; border-bottom:1px solid var(--line)}
+.rows > div:first-child{padding-top:0}
+.rows dt{font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:var(--gold); padding-top:6px}
+.rows dd{margin:0; font-family:var(--font-display); font-size:clamp(20px,3.2vw,26px); line-height:1.3; min-width:0; overflow-wrap:anywhere}
+.rows dd small{display:block; font-family:var(--font-body); font-size:15px; color:var(--muted); margin-top:4px; font-weight:300}
+@media (max-width:480px){.rows > div{grid-template-columns:1fr; gap:4px}}
+
+/* PROGRAM */
+.program{list-style:none; margin:0; padding:0}
+.program li{display:grid; grid-template-columns:120px 1fr; gap:16px; padding:18px 0; border-bottom:1px solid var(--line); align-items:baseline}
+.program li:first-child{padding-top:0}
+.program time{font-family:var(--font-display); font-size:22px; color:var(--gold); font-variant-numeric:tabular-nums}
+.program span{min-width:0; overflow-wrap:anywhere; font-size:18px; font-weight:300}
+@media (max-width:480px){.program li{grid-template-columns:1fr; gap:2px}}
+
+/* VENUE */
+.venue{border:1px solid var(--gold-soft); padding:clamp(22px,4vw,36px); background:var(--surface)}
+.venue h3{font-size:clamp(26px,4vw,34px); font-style:italic}
+.venue .addr{margin-top:10px; color:var(--muted); overflow-wrap:anywhere}
+.venue ul{margin:22px 0 0; padding:0; list-style:none; border-top:1px solid var(--line)}
+.venue li{padding:12px 0; border-bottom:1px solid var(--line); font-size:15px; color:var(--muted); font-weight:300}
+.hint{font-size:14px; color:var(--muted); margin-top:12px}
+
+/* DRESS */
+.swatches{display:flex; flex-wrap:wrap; gap:18px; margin-top:26px}
+.sw{display:flex; flex-direction:column; align-items:center; gap:8px; font-size:11px; letter-spacing:.14em; color:var(--muted)}
+.sw i{width:60px; height:60px; border-radius:50%; border:1px solid var(--gold-soft); display:block}
+
+/* FORM */
+form.card{display:grid; gap:22px; max-width:620px}
+label,.legend{font-size:12px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); display:block; margin-bottom:8px}
+input[type=text],input[type=number],input[type=date],input[type=time],textarea{
+  width:100%; font:inherit; color:var(--ink); background:var(--surface); border:1px solid var(--line); border-radius:0; padding:13px 16px; min-height:50px;
+}
+input:focus,textarea:focus{border-color:var(--gold)}
+textarea{min-height:100px; resize:vertical}
+.choices{display:flex; flex-wrap:wrap; gap:10px}
+.choices label{display:flex; align-items:center; gap:12px; margin:0; font-size:15px; letter-spacing:.02em; text-transform:none; color:var(--ink); font-weight:400; border:1px solid var(--line); padding:13px 16px; cursor:pointer; background:var(--surface); flex:1 1 210px; min-height:50px}
+.choices input{accent-color:var(--gold); width:18px; height:18px; margin:0}
+.out{border:1px dashed var(--gold-soft); padding:18px 20px; white-space:pre-wrap; overflow-wrap:anywhere; font-size:15px; background:var(--surface)}
+
+/* FAQ */
+.faqs{max-width:720px}
+details.faq{border-bottom:1px solid var(--line); padding:20px 0}
+details.faq:first-child{padding-top:0}
+details.faq summary{cursor:pointer; font-family:var(--font-display); font-size:22px; list-style:none; display:flex; justify-content:space-between; align-items:center; gap:16px}
+details.faq summary::-webkit-details-marker{display:none}
+details.faq summary::after{content:"+"; color:var(--gold); font-family:var(--font-body); font-weight:300; font-size:28px; line-height:1}
+details.faq[open] summary::after{content:"–"}
+details.faq p{color:var(--muted); margin-top:12px; max-width:58ch; font-weight:300}
+
+/* FOOTER */
+footer{border-top:1px solid var(--gold-soft); text-align:center; padding:72px 16px calc(120px + env(safe-area-inset-bottom,0px))}
+footer .big{font-family:var(--font-display); font-style:italic; font-size:clamp(34px,8vw,64px); line-height:1.1}
+footer .diamond{margin-block:26px}
+footer p+p{margin-top:10px; color:var(--muted); font-weight:300}
+
+/* EDITOR */
+.fab{position:fixed; right:calc(16px + env(safe-area-inset-right,0px)); bottom:calc(16px + env(safe-area-inset-bottom,0px)); z-index:20; box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.editor{position:fixed; inset:0; z-index:30; background:rgba(3,7,16,.7); display:flex; justify-content:flex-end}
+.editor[hidden]{display:none!important}
+.panel{
+  background:var(--bg); border-left:1px solid var(--gold-soft); width:min(500px,100%); height:100%; overflow-y:auto;
+  padding:calc(24px + env(safe-area-inset-top,0px)) max(22px,env(safe-area-inset-right,0px)) calc(30px + env(safe-area-inset-bottom,0px)) 22px;
+}
+.panel h2{font-size:34px; font-style:italic}
+.panel .grid{display:grid; gap:18px; margin-top:20px}
+.panel .two{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.panel .bar{display:flex; gap:10px; flex-wrap:wrap; margin-top:26px}
+@media (max-width:420px){.panel .two{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion:no-preference){
+  .btn{transition:background .2s,color .2s,border-color .2s}
+  .hero>*{animation:rise .9s ease both}
+  .hero>*:nth-child(2){animation-delay:.1s}.hero>*:nth-child(3){animation-delay:.2s}.hero>*:nth-child(4){animation-delay:.3s}
+}
+@keyframes rise{from{opacity:.001; transform:translateY(12px)}to{opacity:1; transform:none}}
+</style>
+
+</head>
+<body>
+<main class="wrap">
+
+  <header class="hero" id="top">
+    <p class="intro">Together with their family</p>
+    <h1 id="h-family">The Santos Family</h1>
+    <p class="sub">invite you to the dedication of their home</p>
+    <div class="diamond" aria-hidden="true"><i></i></div>
+    <div class="dateline">
+      <div><small>Day</small><b id="d-day">Saturday</b></div>
+      <div><small>Date</small><b id="d-date">December 12, 2026</b></div>
+      <div><small>Time</small><b id="d-time">4:00 PM</b></div>
+    </div>
+    <p class="where" id="h-where"></p>
+    <div class="btn-row">
+      <a class="btn" href="#rsvp">RSVP</a>
+      <a class="btn ghost" id="cal-link" href="#" target="_blank" rel="noopener">Add to calendar</a>
+    </div>
+  </header>
+
+  <section class="sec" id="countdown">
+    <div><span class="label">The countdown</span><h2>Until we open our doors</h2></div>
+    <div>
+      <div class="count" id="count" role="timer" aria-live="off">
+        <div><b id="c-d">0</b><span>Days</span></div>
+        <div><b id="c-h">0</b><span>Hours</span></div>
+        <div><b id="c-m">0</b><span>Minutes</span></div>
+        <div><b id="c-s">0</b><span>Seconds</span></div>
+      </div>
+      <p id="cd-done" hidden>Today is the day. Welcome home.</p>
+    </div>
+  </section>
+
+  <section class="sec" id="message">
+    <div><span class="label">An invitation</span><h2>Come celebrate our new home</h2></div>
+    <div class="body">
+      <p class="quote" id="quote" style="margin-bottom:28px"></p>
+      <div id="msg"></div>
+      <p class="sign"><small>With gratitude,</small><span id="parents"></span></p>
+    </div>
+  </section>
+
+  <section class="sec" id="details">
+    <div><span class="label">The details</span><h2>When and where</h2></div>
+    <dl class="rows">
+      <div><dt>Date</dt><dd id="f-date"></dd></div>
+      <div><dt>Time</dt><dd id="f-time"></dd></div>
+      <div><dt>Address</dt><dd id="f-addr"></dd></div>
+      <div><dt>Blessing led by</dt><dd id="f-pastor"></dd></div>
+      <div><dt>Reply by</dt><dd id="f-rsvp"></dd></div>
+    </dl>
+  </section>
+
+  <section class="sec" id="program">
+    <div><span class="label">Order of events</span><h2>How the evening will go</h2></div>
+    <ol class="program" id="program-list"></ol>
+  </section>
+
+  <section class="sec" id="venue">
+    <div><span class="label">Getting here</span><h2>Find our home</h2></div>
+    <div class="venue">
+      <h3 id="v-name"></h3>
+      <p class="addr" id="v-addr"></p>
+      <div class="btn-row" style="justify-content:flex-start">
+        <a class="btn" id="map-link" href="#" target="_blank" rel="noopener">Open in Maps</a>
+        <button class="btn ghost" type="button" id="copy-addr">Copy address</button>
+      </div>
+      <p class="hint" id="copy-addr-msg" role="status"></p>
+      <ul>
+        <li id="v-park"></li>
+        <li>Please arrive 15 to 30 minutes early so we can greet you properly.</li>
+        <li>Lost on the way? Call the number in the FAQ below.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="sec" id="dress">
+    <div><span class="label">Dress code</span><h2>What to wear</h2></div>
+    <div>
+      <p class="lead" id="dress-text"></p>
+      <div class="swatches" id="swatches"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="rsvp">
+    <div><span class="label">RSVP</span><h2>Will you join us?</h2></div>
+    <div>
+      <p class="lead" id="rsvp-lead" style="margin-bottom:28px"></p>
+      <form class="card" id="rsvp-form" novalidate>
+        <div>
+          <label for="r-name">Full name</label>
+          <input type="text" id="r-name" autocomplete="name" placeholder="e.g. Juan Dela Cruz">
+        </div>
+        <div>
+          <span class="legend" id="r-lg">Can you make it?</span>
+          <div class="choices" role="radiogroup" aria-labelledby="r-lg">
+            <label><input type="radio" name="att" value="yes" checked> Yes, I'll be there</label>
+            <label><input type="radio" name="att" value="no"> Sorry, can't make it</label>
+          </div>
+        </div>
+        <div id="guest-wrap">
+          <label for="r-guests">Guests (including you)</label>
+          <input type="number" id="r-guests" min="1" max="20" value="1" inputmode="numeric">
+        </div>
+        <div>
+          <label for="r-note">Message for the family</label>
+          <textarea id="r-note" placeholder="Share your blessing, wishes, or dietary needs."></textarea>
+        </div>
+        <button class="btn" type="submit">Create my reply</button>
+        <p class="hint" id="rsvp-err" role="alert" hidden>Please enter your name.</p>
+        <div id="rsvp-out" hidden>
+          <div class="out" id="rsvp-text"></div>
+          <div class="btn-row" style="justify-content:flex-start">
+            <button class="btn" type="button" id="rsvp-copy">Copy reply</button>
+          </div>
+          <p class="hint" id="rsvp-help" role="status"></p>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec" id="gifts">
+    <div><span class="label">Gifts</span><h2>About gifts</h2></div>
+    <p class="lead" id="gift-text"></p>
+  </section>
+
+  <section class="sec" id="faq">
+    <div><span class="label">FAQ</span><h2>Good to know</h2></div>
+    <div class="faqs">
+      <details class="faq"><summary>Are children welcome?</summary><p>Yes. Please keep a close eye on little ones during the house tour and the blessing.</p></details>
+      <details class="faq"><summary>Can I take photos and videos?</summary><p>Yes, and we would love to see them. During the blessing prayer, please put your phone away and join us in the moment.</p></details>
+      <details class="faq"><summary>Will there be food?</summary><p id="faq-food"></p></details>
+      <details class="faq"><summary>When is the RSVP deadline?</summary><p id="faq-rsvp"></p></details>
+      <details class="faq"><summary>What if it rains?</summary><p>The program goes on indoors. Bring an umbrella and travel safely.</p></details>
+      <details class="faq"><summary>Who can I contact?</summary><p id="faq-contact"></p></details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="big" id="foot-big">Thank you for being part of our home.</p>
+  <div class="diamond" aria-hidden="true"><i></i></div>
+  <p>Your presence and your prayers are the best gift we could receive.</p>
+  <p id="foot-parents"></p>
+</footer>
+
+<button class="btn small fab" type="button" id="edit-open">Edit details</button>
+
+<div class="editor" id="editor" hidden>
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="ed-title">
+    <h2 id="ed-title">Edit details</h2>
+    <p class="hint">Replace the sample text with your own. The page updates as you type.</p>
+    <div class="grid">
+      <div><label for="e-family">Family name (shown big)</label><input type="text" id="e-family"></div>
+      <div><label for="e-parents">Homeowners</label><input type="text" id="e-parents"></div>
+      <div class="two">
+        <div><label for="e-date">Date</label><input type="date" id="e-date"></div>
+        <div><label for="e-time">Time</label><input type="time" id="e-time"></div>
+      </div>
+      <div><label for="e-venue">Home name (optional)</label><input type="text" id="e-venue"></div>
+      <div><label for="e-addr">Full address</label><input type="text" id="e-addr"></div>
+      <div><label for="e-park">Parking or directions note</label><input type="text" id="e-park"></div>
+      <div><label for="e-pastor">Blessing led by</label><input type="text" id="e-pastor"></div>
+      <div class="two">
+        <div><label for="e-deadline">RSVP deadline</label><input type="date" id="e-deadline"></div>
+        <div><label for="e-contact">Contact number</label><input type="text" id="e-contact"></div>
+      </div>
+      <div><label for="e-quote">Short quote (blank to hide)</label><input type="text" id="e-quote"></div>
+      <div><label for="e-msg">Invitation message</label><textarea id="e-msg" style="min-height:150px"></textarea></div>
+      <div><label for="e-prog">Program (one per line: time | activity)</label><textarea id="e-prog" style="min-height:170px"></textarea></div>
+      <div><label for="e-dress">Dress code</label><textarea id="e-dress"></textarea></div>
+      <div><label for="e-colors">Suggested colors (hex, comma separated)</label><input type="text" id="e-colors"></div>
+      <div><label for="e-gift">About gifts</label><textarea id="e-gift"></textarea></div>
+      <div><label for="e-food">About food</label><textarea id="e-food"></textarea></div>
+    </div>
+    <div class="bar">
+      <button class="btn" type="button" id="edit-close">Done</button>
+      <button class="btn ghost" type="button" id="edit-reset">Reset to sample</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var KEY='house-dedication-invite-v1';
+  var DEF={
+    family:'The Santos Family', parents:'Mark and Anna Santos',
+    date:'2026-12-12', time:'16:00',
+    venue:'The Santos Residence', addr:'123 Rizal Avenue, Poblacion, Meycauayan, Bulacan',
+    park:'Parking is available along the street and in the open lot beside the house.',
+    pastor:'Pastor Daniel Reyes',
+    deadline:'2026-11-28', contact:'0917 123 4567',
+    quote:'Every house is built by hands. A home is built by grace.',
+    msg:'After years of prayer and hard work, we are thankful to finally open the doors of our new home. Before we settle in, we want to dedicate it to God and ask His blessing over everyone who walks through it.\n\nYou have been part of our journey, so we would be honored to have you with us. Join us for a short blessing, a tour of the house, and dinner together.',
+    prog:'4:00 PM | Guests arrive and house tour\n4:30 PM | Welcome and opening prayer\n4:45 PM | Words of thanks from the family\n5:00 PM | Blessing of the home, room by room\n5:30 PM | Toast and family photos\n6:00 PM | Dinner and fellowship',
+    dress:'Semi-formal. Navy, ivory, and gold would match the house. Please wear something comfortable because we will be walking through the rooms.',
+    colors:'#0A1322, #F3ECDD, #D8B46C, #6E7F9E',
+    gift:'Your presence is the only housewarming gift we need. If you would still like to bring something, a small plant, a candle, or a framed blessing for the home would mean a lot.',
+    food:'Yes. We will serve dinner after the blessing. Please mention any allergies or dietary needs in your RSVP.'
+  };
+  function copy(o){return JSON.parse(JSON.stringify(o))}
+  var S=copy(DEF);
+  try{var raw=localStorage.getItem(KEY); if(raw){S=Object.assign(copy(DEF),JSON.parse(raw))}}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+  var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  function $(id){return document.getElementById(id)}
+  function pd(s){var p=(s||'').split('-'); if(p.length<3||!p[0]) return null; return new Date(+p[0],+p[1]-1,+p[2])}
+  function longDate(s){var d=pd(s); return d?MONTHS[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear():'To be announced'}
+  function dayName(s){var d=pd(s); return d?DAYS[d.getDay()]:''}
+  function parts(t){var p=(t||'16:00').split(':'); return [+p[0]||0,+p[1]||0]}
+  function time12(t){var p=parts(t),h=p[0],m=p[1]; return (h%12||12)+':'+(m<10?'0':'')+m+' '+(h<12?'AM':'PM')}
+  function eventStart(){var d=pd(S.date)||new Date(); var p=parts(S.time); d.setHours(p[0],p[1],0,0); return d}
+  function el(tag,cls,txt){var e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e}
+
+  function render(){
+    $('h-family').textContent=S.family;
+    $('d-day').textContent=dayName(S.date)||'TBA'; $('d-date').textContent=longDate(S.date); $('d-time').textContent=time12(S.time);
+    $('h-where').textContent=S.addr;
+    $('quote').textContent=S.quote; $('quote').hidden=!S.quote.trim();
+
+    var m=$('msg'); m.textContent='';
+    S.msg.split(/\n\s*\n/).forEach(function(p){ if(p.trim()) m.appendChild(el('p',null,p.trim())) });
+    $('parents').textContent=S.parents; $('foot-parents').textContent=S.parents;
+
+    $('f-date').textContent=dayName(S.date)+', '+longDate(S.date);
+    $('f-time').textContent=time12(S.time);
+    var fa=$('f-addr'); fa.textContent=S.addr; if(S.venue){fa.textContent=S.venue; fa.appendChild(el('small',null,S.addr))}
+    $('f-pastor').textContent=S.pastor;
+    $('f-rsvp').textContent=longDate(S.deadline);
+
+    var pr=$('program-list'); pr.textContent='';
+    S.prog.split('\n').forEach(function(line){
+      if(!line.trim()) return; var i=line.indexOf('|'); var t=i>-1?line.slice(0,i).trim():''; var a=i>-1?line.slice(i+1).trim():line.trim();
+      var li=el('li'); li.appendChild(el('time',null,t)); li.appendChild(el('span',null,a)); pr.appendChild(li);
+    });
+
+    $('v-name').textContent=S.venue||S.family; $('v-addr').textContent=S.addr; $('v-park').textContent=S.park;
+    $('map-link').href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(S.addr);
+
+    $('dress-text').textContent=S.dress;
+    var sw=$('swatches'); sw.textContent='';
+    S.colors.split(',').forEach(function(c){c=c.trim(); if(!/^#[0-9a-fA-F]{3,8}$/.test(c)) return;
+      var w=el('div','sw'); var i=el('i'); i.style.background=c; w.appendChild(i); w.appendChild(el('span',null,c.toUpperCase())); sw.appendChild(w)});
+
+    $('rsvp-lead').textContent='Please reply by '+longDate(S.deadline)+' so we can prepare enough seats and food.';
+    $('gift-text').textContent=S.gift;
+    $('faq-food').textContent=S.food;
+    $('faq-rsvp').textContent='Please reply by '+longDate(S.deadline)+'. After that date, message us directly at the number below.';
+    $('faq-contact').textContent='Call or text the family at '+S.contact+'.';
+
+    function stamp(dt){function z(n){return (n<10?'0':'')+n} return dt.getFullYear()+z(dt.getMonth()+1)+z(dt.getDate())+'T'+z(dt.getHours())+z(dt.getMinutes())+'00'}
+    var st=eventStart(), en=new Date(st.getTime()+3*3600000);
+    $('cal-link').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent('House dedication: '+S.family)+'&dates='+stamp(st)+'/'+stamp(en)+'&details='+encodeURIComponent('House dedication and blessing. Contact: '+S.contact)+'&location='+encodeURIComponent(S.addr);
+    tick();
+  }
+
+  function tick(){
+    var diff=eventStart().getTime()-Date.now();
+    if(diff<=0){ $('count').hidden=true; $('cd-done').hidden=false; return }
+    $('count').hidden=false; $('cd-done').hidden=true;
+    var s=Math.floor(diff/1000);
+    $('c-d').textContent=Math.floor(s/86400);
+    $('c-h').textContent=Math.floor(s%86400/3600);
+    $('c-m').textContent=Math.floor(s%3600/60);
+    $('c-s').textContent=s%60;
+  }
+  setInterval(tick,1000);
+
+  function copyText(text,msgEl,okMsg,node){
+    function fallback(){
+      try{ var r=document.createRange(); r.selectNodeContents(node); var sel=getSelection(); sel.removeAllRanges(); sel.addRange(r); }catch(e){}
+      msgEl.textContent='Select the text and copy it manually.';
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){msgEl.textContent=okMsg},fallback);
+    }else fallback();
+  }
+  $('copy-addr').addEventListener('click',function(){copyText(S.addr,$('copy-addr-msg'),'Address copied.',$('v-addr'))});
+
+  function attVal(){return document.querySelector('input[name=att]:checked').value}
+  document.querySelectorAll('input[name=att]').forEach(function(r){r.addEventListener('change',function(){$('guest-wrap').hidden=attVal()==='no'})});
+  $('rsvp-form').addEventListener('submit',function(e){
+    e.preventDefault();
+    var name=$('r-name').value.trim();
+    if(!name){ $('rsvp-err').hidden=false; $('r-name').focus(); return }
+    $('rsvp-err').hidden=true;
+    var yes=attVal()==='yes', g=Math.max(1,parseInt($('r-guests').value,10)||1), note=$('r-note').value.trim();
+    var t='Hello! This is my RSVP for the house dedication of '+S.family+'.\n\nName: '+name+'\n'+
+      (yes?'I will be there. Guests: '+g:'Sorry, I am unable to attend.')+
+      '\nDate: '+dayName(S.date)+', '+longDate(S.date)+' at '+time12(S.time)+
+      (note?'\n\nMessage: '+note:'');
+    $('rsvp-text').textContent=t; $('rsvp-out').hidden=false;
+    $('rsvp-help').textContent='Copy this reply and send it to '+S.contact+' by text, Messenger, or Viber. It is not sent until you send it yourself.';
+  });
+  $('rsvp-copy').addEventListener('click',function(){copyText($('rsvp-text').textContent,$('rsvp-help'),'Copied. Now send it to '+S.contact+'.',$('rsvp-text'))});
+
+  var map={family:'e-family',parents:'e-parents',date:'e-date',time:'e-time',venue:'e-venue',addr:'e-addr',park:'e-park',pastor:'e-pastor',deadline:'e-deadline',contact:'e-contact',quote:'e-quote',msg:'e-msg',prog:'e-prog',dress:'e-dress',colors:'e-colors',gift:'e-gift',food:'e-food'};
+  function loadEditor(){Object.keys(map).forEach(function(k){$(map[k]).value=S[k]})}
+  Object.keys(map).forEach(function(k){$(map[k]).addEventListener('input',function(){S[k]=this.value; save(); render()})});
+  $('edit-open').addEventListener('click',function(){loadEditor(); $('editor').hidden=false; $('e-family').focus()});
+  function closeEd(){$('editor').hidden=true; $('edit-open').focus()}
+  $('edit-close').addEventListener('click',closeEd);
+  $('editor').addEventListener('click',function(e){if(e.target===this) closeEd()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!$('editor').hidden) closeEd()});
+  $('edit-reset').addEventListener('click',function(){S=copy(DEF); save(); loadEditor(); render()});
+
+  render();
+})();
+</script>
+</body>
+</html>
