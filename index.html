@@ -428,16 +428,6 @@ window.INVITE = {
   // Map button. Empty = it searches the venue and address above.
   mapQuery: "",
 
-  // Entourage (SAMPLE NAMES. Palitan mo. Add or remove lines freely.)
-  entourage: [
-    { title: "Parents of the Bride", names: ["Mr. & Mrs. Juan Dela Cruz"] },
-    { title: "Parents of the Groom", names: ["Mr. & Mrs. Pedro Santos"] },
-    { title: "Maid of Honor", names: ["Maria Reyes"] },
-    { title: "Best Man", names: ["Jose Garcia"] },
-    { title: "Bridesmaids", names: ["Ana Lopez", "Carla Mendoza", "Bea Torres"] },
-    { title: "Groomsmen", names: ["Mark Bautista", "Paolo Ramos", "Luis Flores"] }
-  ],
-
 };
 </script>
 
@@ -656,13 +646,6 @@ window.INVITE = {
     <p class="dress">Formal attire. Guests are warmly invited to wear shades of midnight, dusty blue, silver, beige or cream.</p>
   </section>
 
-<section id="entourage">
-    <p class="label">With love and gratitude</p>
-    <svg class="flourish" aria-hidden="true" data-reveal><use href="#flourish"/></svg>
-    <h2 data-reveal>Our entourage</h2>
-    <div class="entourage" id="entourage-grid" data-reveal></div>
-  </section>
-
   <section id="rsvp-link">
     <p class="label">Kindly reply</p>
     <svg class="flourish" aria-hidden="true" data-reveal><use href="#flourish"/></svg>
@@ -671,10 +654,7 @@ window.INVITE = {
     <p data-reveal style="margin-top:30px"><a class="btn-link big" id="rsvp-btn" href="rsvp.html">RSVP here</a></p>
   </section>
 
-  <footer data-reveal>
-    <div class="wreath"><svg viewBox="0 0 220 220" aria-hidden="true"><use href="#wreath"/></svg><span class="script" data-k="monogram">M &amp; R</span></div>
-    <p class="label">Timeless love<br>Elegant details<br>Forever together</p>
-  </footer>
+
 </main>
 
 <script>
@@ -825,16 +805,6 @@ window.INVITE = {
   });
   lb.addEventListener("click", function () { lb.classList.remove("on"); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") lb.classList.remove("on"); });
-
-  // Entourage
-  var eg = $("entourage-grid");
-  (C.entourage || []).forEach(function (g) {
-    var c = el("div", "e-card");
-    c.appendChild(el("p", "label", g.title || ""));
-    (g.names || []).forEach(function (n) { c.appendChild(el("p", "", n)); });
-    eg.appendChild(c);
-  });
-  if (!eg.children.length) $("entourage").hidden = true;
 
   // Map button
   var q = C.mapQuery || [C.venue, C.addressLine1, C.addressLine2].filter(Boolean).join(", ");
