@@ -327,11 +327,11 @@ footer::before { content: ""; display: block; height: 1px; width: min(420px, 70%
 @media (prefers-reduced-motion: reduce) { .mg.go .mg-r, .mg.go .mg-o, .mg.go .mg-f, .mg.go .mg-l, .mg.go .mg-h, .mg.done { animation: none; } }
 .seal3d { position: relative; display: grid; place-items: center; perspective: 700px; line-height: 1; }
 .m3d { --ov: -.30em; position: relative; display: block; transform-style: preserve-3d; animation: spin3d 2.5s linear infinite;
-  font-family: "Times New Roman", Times, Georgia, serif; font-weight: 700; font-size: 84px; line-height: 1; letter-spacing: 0; white-space: nowrap; }
+  font-family: "Times New Roman", Times, Georgia, serif; font-weight: 400; font-size: 84px; line-height: 1; letter-spacing: 0; white-space: nowrap; }
 .m3d u { text-decoration: none; display: inline-block; }
 .m3d u + u { margin-left: var(--ov); }
 .m3d i { position: absolute; left: 0; top: 0; width: 100%; text-align: center; font-style: normal; display: block; }
-.m3d b { position: relative; display: block; font-weight: 700; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+.m3d b { position: relative; display: block; font-weight: 400; backface-visibility: hidden; -webkit-backface-visibility: hidden;
   background: linear-gradient(135deg, #fff4c8 0%, #f1cf73 22%, #b9892c 48%, #f6dc8f 66%, #9c6f1f 100%);
   -webkit-background-clip: text; background-clip: text; color: transparent; -webkit-text-fill-color: transparent; }
 @keyframes spin3d { 0% { transform: rotateY(0deg); } 50% { transform: rotateY(90deg); } 50.01% { transform: rotateY(-90deg); } 100% { transform: rotateY(0deg); } }
@@ -562,7 +562,7 @@ window.INVITE = {
   </section>
 
   <footer data-reveal>
-    <div class="wreath"><svg viewBox="0 0 220 220" aria-hidden="true"><use href="#wreath"/></svg><span class="seal3d" id="seal3d" aria-hidden="true"></span></div>
+    <div class="wreath" style="height:130px"><span class="seal3d" id="seal3d" aria-hidden="true"></span></div>
     <p class="label">God is Love<br>Love Never Fails<br>Love yesterday, today and forever</p>
   </footer>
 </main>
@@ -772,7 +772,7 @@ window.INVITE = {
   var txt = String((window.INVITE || {}).monogram || "MR").replace(/[^A-Za-z]/g, "") || "MR";
   function mk(tag, cls, t) { var e = document.createElement(tag); if (cls) e.className = cls; if (t != null) e.textContent = t; return e; }
   function word(tag, cls) { var e = mk(tag, cls); txt.split("").forEach(function (ch, n) { e.appendChild(mk("u", n ? "l2" : "l1", ch)); }); return e; }
-  var wrap = mk("span", "m3d"), D = 16, i, layer, cols = ["#6b4a14", "#8a6119", "#a77a22", "#8a6119"];
+  var wrap = mk("span", "m3d"), D = 6, i, layer, cols = ["#6b4a14", "#8a6119", "#a77a22", "#8a6119"];
   for (i = 0; i < D; i++) {
     layer = word("i");
     layer.style.color = cols[i % cols.length];
