@@ -211,6 +211,7 @@ input[type=text], select, textarea {
 }
 select { appearance: none; padding-right: 42px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23c9a45c' stroke-width='1.6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
 textarea { min-height: 96px; resize: vertical; }
+select:disabled { background-image: none; padding-right: 14px; opacity: .85; cursor: not-allowed; -webkit-text-fill-color: var(--cream); }
 #count-wrap[hidden] { display: none; }
 .extra-names { display: grid; gap: 22px; }
 .extra-names:empty { display: none; }
@@ -487,6 +488,10 @@ window.INVITE = {
         <label for="guest-name">Your name</label>
         <input id="guest-name" type="text" placeholder="Full name" autocomplete="name">
       </div>
+      <div id="count-wrap">
+        <label for="guest-count">Number of guests</label>
+        <select id="guest-count" disabled aria-readonly="true"><option>1</option></select>
+      </div>
       <fieldset>
         <legend>Attendance</legend>
         <div class="choices">
@@ -643,6 +648,10 @@ window.INVITE = {
   // Paste your Google Apps Script Web app URL between the quotes to send RSVPs to your Google Sheet.
   // While it is empty, the form only prepares a reply that guests can copy and message to you.
   var SHEET_URL = "https://script.google.com/macros/s/AKfycbynHRkI0Lsg-GgTJi27meFg70YVJcRN6e2ZWIxE7EbYMPF0tP98Ywsz7weNtjAUqP6p/exec";
+  var countWrap = document.getElementById("count-wrap");
+  function syncCount() { countWrap.hidden = form.querySelector("input[name=att]:checked").value.indexOf("Joyfully") !== 0; }
+  [].forEach.call(form.querySelectorAll("input[name=att]"), function (r) { r.addEventListener("change", syncCount); });
+  syncCount();
   var sendBtn = form.querySelector("button[type=submit]");
   var sendLabel = SHEET_URL ? "Send my RSVP" : "Prepare my reply";
   sendBtn.textContent = sendLabel;
@@ -658,7 +667,8 @@ window.INVITE = {
     }
     var att = form.querySelector("input[name=att]:checked").value;
     var msg = document.getElementById("guest-msg").value.trim();
-    var out = "RSVP for " + (V.monogram || "") + " Wedding, " + (V.dateLong || "") + "\n" + name + " " + att.toLowerCase() + "." +
+    var attending = att.indexOf("Joyfully") === 0;
+    var out = "RSVP for " + (V.monogram || "") + " Wedding, " + (V.dateLong || "") + "\n" + name + " " + att.toLowerCase() + (attending ? " (1 guest)" : "") + "." +
       (msg ? "\nMessage: " + msg : "");
     var copyBtn = document.getElementById("copy-btn");
     function showCopyMode(msgNote) {
@@ -674,8 +684,8 @@ window.INVITE = {
     var body = new URLSearchParams({
       name: name,
       attendance: att,
-      guests: "",
-      guestNames: "",
+      guests: attending ? "1" : "0",
+      guestNames: attending ? name : "",
       message: msg
     });
     sendBtn.disabled = true;
@@ -685,7 +695,7 @@ window.INVITE = {
       copyBtn.hidden = true;
       note.textContent = "";
       result.classList.add("on");
-      form.reset();
+      form.reset(); syncCount();
     }, function () {
       showCopyMode("We could not send your reply. Please copy it and message the couple.");
     }).then(function () {
