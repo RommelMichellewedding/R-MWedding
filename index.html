@@ -569,10 +569,24 @@ window.INVITE = {
   if (!intro || !btn) return;
   var root = document.documentElement;
   // Coming back from the RSVP page: skip the envelope and go straight to the invitation
-  var skip = false;
-  try { skip = location.hash === "#home" || sessionStorage.getItem("skipEnvelope") === "1"; sessionStorage.removeItem("skipEnvelope"); } catch (e) { skip = location.hash === "#home"; }
-  var rb = document.getElementById("rsvp-btn");
-  if (rb) rb.addEventListener("click", function () { try { sessionStorage.setItem("skipEnvelope", "1"); } catch (e) {} });
+  // A reload / refresh always brings the envelope back. Only a visit that comes from the RSVP page skips it.
+  var isReload = false;
+  try {
+    var nav = performance.getEntriesByType("navigation")[0];
+    isReload = nav ? nav.type === "reload" : !!(performance.navigation && performance.navigation.type === 1);
+  } catch (e) {}
+  var fromRsvp = location.hash === "#home";
+  try { fromRsvp = fromRsvp || sessionStorage.getItem("skipEnvelope") === "1"; sessionStorage.removeItem("skipEnvelope"); } catch (e) {}
+  var skip = fromRsvp && !isReload;
+  // Keep the address clean, so a later refresh starts from the envelope again
+  if (location.hash === "#home") { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} }
+  // If the page is restored from the back/forward cache, drop any leftover flag
+  window.addEventListener("pageshow", function (ev) { if (ev.persisted) { try { sessionStorage.removeItem("skipEnvelope"); } catch (e) {} } });
+  // Remember that the guest is heading to the RSVP page (the button sits further down the page, so listen on the document)
+  document.addEventListener("click", function (ev) {
+    var a = ev.target && ev.target.closest ? ev.target.closest("#rsvp-btn, a[href^='rsvp']") : null;
+    if (a) { try { sessionStorage.setItem("skipEnvelope", "1"); } catch (e) {} }
+  });
   if (skip) { root.classList.add("opened"); window.scrollTo(0, 0); return; }
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   intro.hidden = false;
