@@ -568,6 +568,12 @@ window.INVITE = {
   var btn = document.getElementById("env-btn");
   if (!intro || !btn) return;
   var root = document.documentElement;
+  // Coming back from the RSVP page: skip the envelope and go straight to the invitation
+  var skip = false;
+  try { skip = location.hash === "#home" || sessionStorage.getItem("skipEnvelope") === "1"; sessionStorage.removeItem("skipEnvelope"); } catch (e) { skip = location.hash === "#home"; }
+  var rb = document.getElementById("rsvp-btn");
+  if (rb) rb.addEventListener("click", function () { try { sessionStorage.setItem("skipEnvelope", "1"); } catch (e) {} });
+  if (skip) { root.classList.add("opened"); window.scrollTo(0, 0); return; }
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   intro.hidden = false;
   root.classList.add("locked");
