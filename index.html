@@ -69,9 +69,16 @@ h2 { font-weight: 600; font-size: clamp(32px, 6.4vw, 46px); line-height: 1.15; t
 .flourish { display: block; width: min(320px, 80%); height: auto; margin: 12px auto 14px; color: var(--gold); }
 
 /* page frame, petals, gold lettering */
+body::before, body::after { box-sizing: border-box; will-change: transform; transform: translateZ(0); backface-visibility: hidden; }
 body::before { content: ""; position: fixed; inset: 10px; border: 1px solid rgba(201, 164, 92, .3); pointer-events: none; z-index: 3; }
 body::after { content: ""; position: fixed; inset: 15px; border: 1px solid rgba(201, 164, 92, .12); pointer-events: none; z-index: 3; }
 @media (max-width: 560px) { body::before { inset: 5px; } body::after { inset: 9px; } }
+@supports (height: 100dvh) {
+  body::before, body::after { bottom: auto; }
+  body::before { height: calc(var(--fh, 100dvh) - 20px); }
+  body::after { height: calc(var(--fh, 100dvh) - 30px); }
+  @media (max-width: 560px) { body::before { height: calc(var(--fh, 100dvh) - 10px); } body::after { height: calc(var(--fh, 100dvh) - 18px); } }
+}
 #fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
   .mono, .hero-names, h2, .count strong, .wreath .script, .intro-top .script {
@@ -1109,5 +1116,16 @@ window.INVITE = {
 })();
 </script>
 
+<script>
+/* keep the gold page frame glued to the visible screen while the phone's address bar slides in and out */
+(function () {
+  var r = document.documentElement, q = 0;
+  function set() { q = 0; r.style.setProperty("--fh", window.innerHeight + "px"); }
+  function ask() { if (!q) q = requestAnimationFrame(set); }
+  set();
+  addEventListener("resize", ask); addEventListener("scroll", ask, { passive: true }); addEventListener("orientationchange", ask);
+  if (window.visualViewport) { visualViewport.addEventListener("resize", ask); visualViewport.addEventListener("scroll", ask); }
+})();
+</script>
 </body>
 </html>

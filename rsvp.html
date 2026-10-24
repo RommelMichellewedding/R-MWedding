@@ -72,9 +72,9 @@ body::after { inset: 15px; border: 1px solid rgba(201, 164, 92, .12); }
 @media (max-width: 560px) { body::before { inset: 5px; } body::after { inset: 9px; } }
 @supports (height: 100dvh) {
   body::before, body::after { bottom: auto; }
-  body::before { height: calc(100dvh - 20px); }
-  body::after { height: calc(100dvh - 30px); }
-  @media (max-width: 560px) { body::before { height: calc(100dvh - 10px); } body::after { height: calc(100dvh - 18px); } }
+  body::before { height: calc(var(--fh, 100dvh) - 20px); }
+  body::after { height: calc(var(--fh, 100dvh) - 30px); }
+  @media (max-width: 560px) { body::before { height: calc(var(--fh, 100dvh) - 10px); } body::after { height: calc(var(--fh, 100dvh) - 18px); } }
 }
 #fx { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 @supports ((-webkit-background-clip: text) or (background-clip: text)) {
@@ -783,6 +783,17 @@ window.INVITE = {
   front.style.transform = "translateZ(" + (D / 2) + "px)";
   wrap.appendChild(front);
   seal.appendChild(wrap);
+})();
+</script>
+<script>
+/* keep the gold page frame glued to the visible screen while the phone's address bar slides in and out */
+(function () {
+  var r = document.documentElement, q = 0;
+  function set() { q = 0; r.style.setProperty("--fh", window.innerHeight + "px"); }
+  function ask() { if (!q) q = requestAnimationFrame(set); }
+  set();
+  addEventListener("resize", ask); addEventListener("scroll", ask, { passive: true }); addEventListener("orientationchange", ask);
+  if (window.visualViewport) { visualViewport.addEventListener("resize", ask); visualViewport.addEventListener("scroll", ask); }
 })();
 </script>
 </body>
