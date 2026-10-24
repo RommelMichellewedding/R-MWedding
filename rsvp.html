@@ -416,7 +416,7 @@ window.INVITE = {
   taglineB: "One journey",
   taglineC: "A lifetime together",
   receptionNote: "Reception to follow",
-  rsvpBy: "December 1, 2026",
+  rsvpBy: "November 15, 2026",
   closing: "We can\u2019t wait to celebrate with you!",
 
 };
@@ -479,19 +479,13 @@ window.INVITE = {
     <p class="label">Kindly reply</p>
     <svg class="flourish" aria-hidden="true" data-reveal><use href="#flourish"/></svg>
     <h2 data-reveal>Will you join us?</h2>
-    <p style="margin-top:12px;color:var(--beige);font-style:italic">Kindly reply on or before <span data-k="rsvpBy">December 1, 2026</span></p>
+    <p style="margin-top:12px;color:var(--beige);font-style:italic">Kindly reply on or before <span data-k="rsvpBy">November 15, 2026</span></p>
+    <p style="margin:22px auto 0;max-width:440px;color:var(--cream);font-style:italic;font-size:15px;line-height:1.7;text-transform:uppercase;letter-spacing:.06em">As much as we want to celebrate with your kids, we have limited our event to adults only except for those children in our entourage. We deeply hope you understand. Thank you.</p>
 
     <form id="rsvp-form" novalidate data-reveal>
       <div>
         <label for="guest-name">Your name</label>
         <input id="guest-name" type="text" placeholder="Full name" autocomplete="name">
-      </div>
-      <div class="extra-names" id="extra-names"></div>
-      <div id="count-wrap">
-        <label for="guest-count">Number of guests</label>
-        <select id="guest-count">
-          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
-        </select>
       </div>
       <fieldset>
         <legend>Attendance</legend>
@@ -649,24 +643,6 @@ window.INVITE = {
   // Paste your Google Apps Script Web app URL between the quotes to send RSVPs to your Google Sheet.
   // While it is empty, the form only prepares a reply that guests can copy and message to you.
   var SHEET_URL = "https://script.google.com/macros/s/AKfycbynHRkI0Lsg-GgTJi27meFg70YVJcRN6e2ZWIxE7EbYMPF0tP98Ywsz7weNtjAUqP6p/exec";
-  var countSel = document.getElementById("guest-count"), countWrap = document.getElementById("count-wrap"), extra = document.getElementById("extra-names");
-  function renderNames() {
-    var n = parseInt(countSel.value, 10) || 1;
-    var attending = form.querySelector("input[name=att]:checked").value.indexOf("Joyfully") === 0;
-    countWrap.hidden = !attending;
-    var old = [].map.call(extra.querySelectorAll("input"), function (x) { return x.value; });
-    extra.innerHTML = "";
-    if (!attending) return;
-    for (var i = 2; i <= n; i++) {
-      var w = document.createElement("div"), l = document.createElement("label"), inp = document.createElement("input");
-      l.setAttribute("for", "guest-n" + i); l.textContent = "Guest " + i + " name";
-      inp.type = "text"; inp.id = "guest-n" + i; inp.placeholder = "Full name"; inp.autocomplete = "off"; inp.value = old[i - 2] || "";
-      w.appendChild(l); w.appendChild(inp); extra.appendChild(w);
-    }
-  }
-  countSel.addEventListener("change", renderNames);
-  [].forEach.call(form.querySelectorAll("input[name=att]"), function (r) { r.addEventListener("change", renderNames); });
-  renderNames();
   var sendBtn = form.querySelector("button[type=submit]");
   var sendLabel = SHEET_URL ? "Send my RSVP" : "Prepare my reply";
   sendBtn.textContent = sendLabel;
@@ -681,20 +657,8 @@ window.INVITE = {
       return;
     }
     var att = form.querySelector("input[name=att]:checked").value;
-    var count = document.getElementById("guest-count").value;
     var msg = document.getElementById("guest-msg").value.trim();
-    var attending = att.indexOf("Joyfully") === 0, names = [name];
-    if (attending) {
-      var boxes = extra.querySelectorAll("input");
-      for (var b = 0; b < boxes.length; b++) {
-        var nv = boxes[b].value.trim();
-        if (!nv) { boxes[b].focus(); boxes[b].placeholder = "Please enter this name"; return; }
-        names.push(nv);
-      }
-    }
-    var out = "RSVP for " + (V.monogram || "") + " Wedding, " + (V.dateLong || "") + "\n" + name + " " + att.toLowerCase() +
-      (att.indexOf("Joyfully") === 0 ? " (" + count + (count === "1" ? " guest" : " guests") + ")" : "") + "." +
-      (attending && names.length > 1 ? "\nGuests: " + names.join(", ") : "") +
+    var out = "RSVP for " + (V.monogram || "") + " Wedding, " + (V.dateLong || "") + "\n" + name + " " + att.toLowerCase() + "." +
       (msg ? "\nMessage: " + msg : "");
     var copyBtn = document.getElementById("copy-btn");
     function showCopyMode(msgNote) {
@@ -710,8 +674,8 @@ window.INVITE = {
     var body = new URLSearchParams({
       name: name,
       attendance: att,
-      guests: att.indexOf("Joyfully") === 0 ? count : "0",
-      guestNames: attending ? names.join(", ") : "",
+      guests: "",
+      guestNames: "",
       message: msg
     });
     sendBtn.disabled = true;
@@ -721,7 +685,7 @@ window.INVITE = {
       copyBtn.hidden = true;
       note.textContent = "";
       result.classList.add("on");
-      form.reset(); renderNames();
+      form.reset();
     }, function () {
       showCopyMode("We could not send your reply. Please copy it and message the couple.");
     }).then(function () {
