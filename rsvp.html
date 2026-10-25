@@ -770,9 +770,13 @@ window.INVITE = {
     fetch(SHEET_URL, { method: "POST", mode: "no-cors", body: body }).then(function () {
       text.textContent = "Thank you, " + name + ". Your reply has been sent to " + (V.names || "the couple") + ".";
       copyBtn.hidden = true;
-      note.textContent = "";
+      note.textContent = "Taking you back to the invitation...";
       result.classList.add("on");
       form.reset(); syncCount();
+      setTimeout(function () {
+        try { sessionStorage.setItem("skipEnvelope", "1"); } catch (e) {}
+        location.href = "index.html#home";
+      }, 1500);
     }, function () {
       showCopyMode("We could not send your reply. Please copy it and message the couple.");
     }).then(function () {
