@@ -712,7 +712,7 @@ window.INVITE = {
 
   // Paste your Google Apps Script Web app URL between the quotes to send RSVPs to your Google Sheet.
   // While it is empty, the form only prepares a reply that guests can copy and message to you.
-  var SHEET_URL = "https://script.google.com/macros/s/AKfycbynHRkI0Lsg-GgTJi27meFg70YVJcRN6e2ZWIxE7EbYMPF0tP98Ywsz7weNtjAUqP6p/exec";
+  var SHEET_URL = "https://script.google.com/macros/s/AKfycbx8Vozm6wjeEU6J-ZqSzyHzRExNKleeEfEk5m2rnEIX3KByQ0gSvXfQvtWnX9gAv3J5/exec";
   var countWrap = document.getElementById("count-wrap");
   function syncCount() { countWrap.hidden = form.querySelector("input[name=att]:checked").value.indexOf("Joyfully") !== 0; }
   [].forEach.call(form.querySelectorAll("input[name=att]"), function (r) { r.addEventListener("change", syncCount); });
