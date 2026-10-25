@@ -240,6 +240,12 @@ button {
   color: var(--midnight); border: 0; padding: 17px 20px; font-weight: 500; transition: background-position .7s ease;
 }
 button:hover { background-position: 100% 0; }
+
+.notice { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: 20px; background: rgba(4, 8, 20, .82); }
+.notice[hidden] { display: none; }
+.notice-box { max-width: 420px; width: 100%; padding: 32px 26px; text-align: center; background: var(--navy); border: 1px solid var(--gold); box-shadow: 0 0 0 4px var(--midnight), 0 0 0 5px rgba(201,164,92,.5), 0 20px 60px rgba(0,0,0,.6); display: grid; gap: 16px; }
+.notice-title { font-size: 38px; line-height: 1.1; }
+.notice-text { font-size: 19px; font-style: italic; color: var(--cream); }
 button.ghost { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
 button.ghost:hover { background: rgba(201, 164, 92, .12); }
 button:disabled { opacity: .65; cursor: progress; }
@@ -448,7 +454,7 @@ window.INVITE = {
   monogram: "M & R",              // the two initials
 
   // Date and time  (month = 1 to 12, hour = 0 to 23)
-  year: 2026, month: 12, day: 27, hour: 15, minute: 0,
+  year: 2026, month: 12, day: 27, hour: 14, minute: 0,
 
   // Place
   venue: "The Grand Vista Hotel",
@@ -552,7 +558,8 @@ window.INVITE = {
         <label for="guest-msg">Message for the couple</label>
         <textarea id="guest-msg" placeholder="Share a wish or note any dietary needs"></textarea>
       </div>
-      <button type="submit">Prepare my reply</button>
+      <button type="button" id="proceed-btn">Proceed</button>
+      <button type="submit" id="send-btn" hidden>Send my RSVP</button>
       <div class="result" id="result" role="status">
         <p id="result-text"></p>
         <button type="button" class="ghost" id="copy-btn">Copy reply</button>
@@ -566,6 +573,15 @@ window.INVITE = {
     <p class="label">God is Love<br>Love Never Fails<br>Love yesterday, today and forever</p>
   </footer>
 </main>
+
+<div class="notice" id="notice" role="dialog" aria-modal="true" aria-labelledby="notice-title" hidden>
+  <div class="notice-box">
+    <p class="script notice-title" id="notice-title">A gentle reminder</p>
+    <p class="notice-text">We have reserved only one seat at your honor. Due to limited venue space, we are unable to accommodate additional plus ones.</p>
+    <p class="notice-text">Thank you!</p>
+    <button type="button" id="notice-ok">I understand</button>
+  </div>
+</div>
 
 <script>
 (function () {
@@ -669,7 +685,7 @@ window.INVITE = {
     V.dateLong = V.month + " " + V.day + ", " + V.year;
     V.dateFull = V.weekday + ", " + V.dateLong;
     V.noteLine = V.dateFull + " · " + V.time;
-    V.seatBy = clock(new Date(when.getTime() - 30 * 60000));
+    V.seatBy = clock(new Date(when.getTime() - 15 * 60000));
   }
   var nodes = document.querySelectorAll("[data-k]");
   for (var i = 0; i < nodes.length; i++) {
@@ -701,7 +717,19 @@ window.INVITE = {
   function syncCount() { countWrap.hidden = form.querySelector("input[name=att]:checked").value.indexOf("Joyfully") !== 0; }
   [].forEach.call(form.querySelectorAll("input[name=att]"), function (r) { r.addEventListener("change", syncCount); });
   syncCount();
-  var sendBtn = form.querySelector("button[type=submit]");
+  var sendBtn = document.getElementById("send-btn");
+  var proceedBtn = document.getElementById("proceed-btn");
+  var notice = document.getElementById("notice");
+  proceedBtn.addEventListener("click", function () {
+    notice.hidden = false;
+    document.getElementById("notice-ok").focus();
+  });
+  document.getElementById("notice-ok").addEventListener("click", function () {
+    notice.hidden = true;
+    proceedBtn.hidden = true;
+    sendBtn.hidden = false;
+    sendBtn.focus();
+  });
   var sendLabel = SHEET_URL ? "Send my RSVP" : "Prepare my reply";
   sendBtn.textContent = sendLabel;
 

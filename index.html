@@ -405,6 +405,7 @@ html.locked, html.locked body { overflow: hidden; height: 100%; }
 .env-btn.open .seal { opacity: 0; scale: .6; }
 .env-btn.open .env-card { transform: translateY(-58%); }
 .intro.leaving .env-btn { transform: scale(1.5); opacity: 0; }
+.intro-seat { text-align: center; font-size: clamp(24px, 6.5vw, 32px); line-height: 1.2; margin: 0 0 6px; }
 .intro-hint { transition: opacity .4s ease; text-align: center; color: var(--gold); }
 .intro.is-open .intro-hint { opacity: 0; }
 @media (prefers-reduced-motion: no-preference) {
@@ -468,7 +469,7 @@ window.INVITE = {
   monogram: "M & R",              // the two initials
 
   // Date and time  (month = 1 to 12, hour = 0 to 23)
-  year: 2026, month: 12, day: 27, hour: 14, minute: 30,
+  year: 2026, month: 12, day: 27, hour: 14, minute: 0,
 
   // Place
   venue: "St. Michael the Archangel Parish Church",
@@ -573,6 +574,7 @@ window.INVITE = {
     <span class="flap"></span>
     <span class="seal" data-k="seal">M&amp;R</span>
   </button>
+  <p class="script intro-seat">We have reserved one seat for you.</p>
   <p class="label intro-hint">Tap the seal to open</p>
 </div>
 <script>
@@ -735,14 +737,6 @@ window.INVITE = {
     <div class="gallery" id="gallery-grid" data-reveal></div>
   </section>
 
-  <section id="rsvp-link">
-    <svg class="flourish" aria-hidden="true" data-reveal><use href="#flourish"/></svg>
-    <h2 data-reveal>Will you join us?</h2>
-    <p style="margin-top:12px;color:var(--beige);font-style:italic" data-reveal>Kindly reply on or before <span data-k="rsvpBy">November 15, 2026</span></p>
-    <p data-reveal style="margin-top:30px"><a class="btn-link big" id="rsvp-btn" href="rsvp.html">RSVP here</a></p>
-    <p data-reveal style="margin:30px auto 0;max-width:440px;color:var(--cream);font-style:italic;font-size:15px;line-height:1.7;text-transform:uppercase;letter-spacing:.06em">As much as we want to celebrate with your kids, we have limited our event to adults only except for those children in our entourage. We deeply hope you understand. Thank you.</p>
-  </section>
-
   <section id="colors">
     <p class="label">Wedding theme</p>
     <svg class="flourish" aria-hidden="true" data-reveal><use href="#flourish"/></svg>
@@ -756,6 +750,14 @@ window.INVITE = {
     </div>
     <p class="count-note" style="margin-top:26px">Tap the colors to see the outfit inspiration</p>
     <p class="dress" style="margin-top:18px">To maintain the formal nature of the event, please do not wear casual attire such as shorts, slippers, tank tops, or revealing clothing.</p>
+  </section>
+
+  <section id="rsvp-link">
+    <svg class="flourish" aria-hidden="true" data-reveal><use href="#flourish"/></svg>
+    <h2 data-reveal>Will you join us?</h2>
+    <p style="margin-top:12px;color:var(--beige);font-style:italic" data-reveal>Kindly reply on or before <span data-k="rsvpBy">November 15, 2026</span></p>
+    <p data-reveal style="margin-top:30px"><a class="btn-link big" id="rsvp-btn" href="rsvp.html">RSVP here</a></p>
+    <p data-reveal style="margin:30px auto 0;max-width:440px;color:var(--cream);font-style:italic;font-size:15px;line-height:1.7;text-transform:uppercase;letter-spacing:.06em">As much as we want to celebrate with your kids, we have limited our event to adults only except for those children in our entourage. We deeply hope you understand. Thank you.</p>
   </section>
 
 
@@ -898,7 +900,7 @@ window.INVITE = {
     V.dateLong = V.month + " " + V.day + ", " + V.year;
     V.dateFull = V.weekday + ", " + V.dateLong;
     V.noteLine = V.dateFull + " · " + V.time;
-    V.seatBy = clock(new Date(when.getTime() - 30 * 60000));
+    V.seatBy = clock(new Date(when.getTime() - 15 * 60000));
   }
   var nodes = document.querySelectorAll("[data-k]");
   for (var i = 0; i < nodes.length; i++) {
